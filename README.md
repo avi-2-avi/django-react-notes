@@ -21,3 +21,7 @@
 ├── urls.py
 └── wsgi.py
 ```
+
+### Connection to Postgres
+
+https://djangocentral.com/using-postgresql-with-django/
