@@ -8,12 +8,17 @@ import {
   IconButton,
   VStack,
 } from "@chakra-ui/react";
+import { ListItem } from "../components/ListItem";
 
 export const NotesListPage = () => {
   const scrollbar = {
     "::-webkit-scrollbar": {
       display: "none",
     },
+  };
+
+  const onClickItem = () => {
+    console.log("Works!");
   };
 
   return (
@@ -24,8 +29,8 @@ export const NotesListPage = () => {
             Note List
           </Heading>
         </Flex>
-        <Flex direction="column" bg="#2E3134" px={5} py={6} h="60vh">
-          <Flex w="full">
+        <Flex direction="column" bg="#2E3134" py={6} h="60vh">
+          <Flex w="full" px={5}>
             <Heading pb={6} size="lg" as="h2">
               <HamburgerIcon mb={1} /> Notes
             </Heading>
@@ -35,7 +40,12 @@ export const NotesListPage = () => {
             </Text>
           </Flex>
           <VStack maxH="full" overflowY="auto" sx={scrollbar}>
-            <div>Hello</div>
+            <ListItem
+              tittle="Tittle"
+              description="Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello "
+              updateDate="12/12/2022"
+              onClick={onClickItem}
+            />
           </VStack>
         </Flex>
         <Flex w="full" justifyContent="end" bg="#2E3134" p={6}>
