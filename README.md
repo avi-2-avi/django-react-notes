@@ -25,3 +25,7 @@
 ### Connection to Postgres
 
 https://djangocentral.com/using-postgresql-with-django/
+
+### Django REST framework
+
+https://www.django-rest-framework.org/
