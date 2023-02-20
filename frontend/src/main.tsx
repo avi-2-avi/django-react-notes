@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { NotePage } from "./pages/NotePage";
 import { NotesListPage } from "./pages/NotesListPage";
+import { theme } from "./theme";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <RouterProvider router={router} />
     </ChakraProvider>
   </React.StrictMode>
