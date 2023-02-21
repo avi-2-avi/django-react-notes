@@ -61,7 +61,7 @@ export const NotesListPage = () => {
           </Heading>
           <Spacer />
           <Text fontSize="xl" pt="4" color="white.400">
-            3
+            {notes.length}
           </Text>
         </Flex>
         <VStack minH="340px" overflowY="auto" sx={scrollbar}>
