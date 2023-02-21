@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     element: <NotesListPage />,
   },
   {
-    path: "/note/:id",
+    path: "/:id",
     element: <NotePage />,
   },
   {

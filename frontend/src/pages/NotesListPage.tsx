@@ -6,43 +6,50 @@ import {
   Spacer,
   IconButton,
   VStack,
+  Link,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { ListItem } from "../components/ListItem";
 import { NoteLayout } from "../layout/NoteLayout";
+import { Link as ReachLink } from "react-router-dom";
 
 import axios, { AxiosResponse } from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface Note {
   id: number;
   tittle: string;
-  description: string;
+  body: string;
+  updated: string;
 }
+
+const formattedDate = (strDate: string) => {
+  const date = new Date(strDate);
+  const day = date.getDate();
+  const month = date.getMonth();
+  const year = date.getFullYear();
+
+  return `${day}/${month}/${year}`;
+};
 
 export const NotesListPage = () => {
   const [notes, setNotes] = useState<Note[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getNotes() {
       const response: AxiosResponse<Note[]> = await axios.get(
         "http://localhost:8000/api/notes/"
       );
-      console.log(response);
       setNotes(response.data);
     }
     getNotes();
   }, []);
 
-  console.log(notes);
-
   const scrollbar = {
     "::-webkit-scrollbar": {
       display: "none",
     },
-  };
-
-  const onClickItem = () => {
-    console.log("Works!");
   };
 
   return (
@@ -59,13 +66,20 @@ export const NotesListPage = () => {
         </Flex>
         <VStack minH="340px" overflowY="auto" sx={scrollbar}>
           {notes.map((note: Note) => (
-            <ListItem
+            <Link
               key={note.id}
-              tittle={note.tittle}
-              description={note.description}
-              updateDate="12/12/2022"
-              onClick={onClickItem}
-            />
+              as={ReachLink}
+              to={`/${note.id}`}
+              width="full"
+              _hover={{ textDecor: "none" }}
+            >
+              <ListItem
+                key={note.id}
+                tittle={note.tittle}
+                description={note.body}
+                updateDate={formattedDate(note.updated)}
+              />
+            </Link>
           ))}
         </VStack>
         <Flex w="full" justifyContent="end" bg="#2E3134" p={6} maxW="full">
