@@ -8,21 +8,15 @@ import {
   Button,
   useToast,
 } from "@chakra-ui/react";
-import axios, { AxiosResponse } from "axios";
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { NoteLayout } from "../layout/NoteLayout";
-
-interface Note {
-  tittle: string;
-  body: string;
-}
 
 const noteData = { tittle: "", body: "" };
 
-export const NotePage = () => {
+export const NewNotePage = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
   const [note, setNote] = useState(noteData);
   const toast = useToast();
 
@@ -34,7 +28,11 @@ export const NotePage = () => {
     setNote({ ...note, [name]: value });
   };
 
-  const onUpdateNote = () => {
+  const onResetNote = () => {
+    setNote(noteData);
+  };
+
+  const onSaveNote = () => {
     if (note.tittle === "") {
       if (note.body === "") {
         toast({
@@ -52,7 +50,7 @@ export const NotePage = () => {
 
     const postNote = async () => {
       try {
-        await axios.put(`http://localhost:8000/api/note/${id}/`, note);
+        await axios.post("http://localhost:8000/api/notes/", note);
         navigate(-1);
       } catch (e) {
         toast({
@@ -65,24 +63,9 @@ export const NotePage = () => {
     postNote();
   };
 
-  const onResetNote = () => {
-    setNote(noteData);
-  };
-
   const onGoBack = () => {
     navigate(-1);
   };
-
-  useEffect(() => {
-    const getNote = async () => {
-      const response: AxiosResponse<Note> = await axios.get(
-        `http://localhost:8000/api/note/${id}/`
-      );
-      setNote(response.data);
-    };
-
-    getNote();
-  }, []);
 
   const scrollbar = {
     "::-webkit-scrollbar": {
@@ -97,8 +80,7 @@ export const NotePage = () => {
           w="full"
           alignItems="center"
           justify="space-between"
-          pl="4"
-          pr="6"
+          px="4"
           h="5vh"
         >
           <Heading as="h2">
@@ -118,7 +100,7 @@ export const NotePage = () => {
               </Button>
             </Heading>
             <Heading as="h2" size="md">
-              <Button background="inherit" onClick={onUpdateNote}>
+              <Button background="inherit" onClick={onSaveNote}>
                 Save
               </Button>
             </Heading>

@@ -37,7 +37,7 @@ export const NotesListPage = () => {
   const navigate = useNavigate();
 
   const onNewNote = () => {
-    console.log("Working");
+    navigate("/new/note");
   };
 
   useEffect(() => {

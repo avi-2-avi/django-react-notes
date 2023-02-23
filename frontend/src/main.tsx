@@ -6,6 +6,7 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
+import { NewNotePage } from "./pages/NewNotePage";
 import { NotePage } from "./pages/NotePage";
 import { NotesListPage } from "./pages/NotesListPage";
 import { theme } from "./theme";
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/:id",
     element: <NotePage />,
+  },
+  {
+    path: "/new/note",
+    element: <NewNotePage />,
   },
   {
     path: "/*",
