@@ -1,16 +1,20 @@
-# Project Title
+# Django React Notes
 
 ## Table of Contents
 
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Usage](#usage)
-- [Contributing](../CONTRIBUTING.md)
 - [Sources](#sources)
 
 ## About <a name = "about"></a>
 
-Notes App made with Django and React.js (Typescript). This is a great project to get familiarized with both technologies. I did my own version, based on <a href="https://github.com/divanov11/Django-React-NotesApp">divanov11</a> NotesApp app.
+Notes App made with Django and React.js (Typescript). This is a great project to get familiarized with both technologies (and how they interact together). I did my own version, based on <a href="https://github.com/divanov11/Django-React-NotesApp">divanov11</a> NotesApp app.
+
+
+
+https://user-images.githubusercontent.com/54769706/220842205-35d66e8b-60ef-4739-9988-cacd296d821c.mp4
+
 
 ## Getting Started <a name = "getting_started"></a>
 
