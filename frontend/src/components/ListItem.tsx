@@ -3,7 +3,7 @@ import { FC, MouseEventHandler } from "react";
 
 export interface ListItemProps {
   tittle: string;
-  description: string;
+  body: string;
   updateDate: string;
   onClick?: MouseEventHandler<HTMLDivElement>;
 }
@@ -11,7 +11,7 @@ export interface ListItemProps {
 export const ListItem: FC<ListItemProps> = ({
   onClick,
   tittle,
-  description,
+  body,
   updateDate,
 }) => {
   const hoverStyle = {
@@ -33,7 +33,7 @@ export const ListItem: FC<ListItemProps> = ({
       <HStack w="inherit" textColor="whiteAlpha.800">
         <Text>{updateDate}</Text>
         <Text maxW="full" isTruncated>
-          {description}
+          {body}
         </Text>
       </HStack>
     </VStack>

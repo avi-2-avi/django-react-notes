@@ -13,7 +13,7 @@ export const NoteLayout = ({ children }: NoteLayoutProps) => {
           Note List
         </Heading>
       </Flex>
-      <Flex direction="column" bg="#2E3134" py={6} h="60vh">
+      <Flex direction="column" bg="#2E3134" py={6} h="75vh">
         {children}
       </Flex>
     </Container>

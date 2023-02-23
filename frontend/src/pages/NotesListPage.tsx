@@ -36,13 +36,17 @@ export const NotesListPage = () => {
   const [notes, setNotes] = useState<Note[]>([]);
   const navigate = useNavigate();
 
+  const onNewNote = () => {
+    console.log("Working");
+  };
+
   useEffect(() => {
-    async function getNotes() {
+    const getNotes = async () => {
       const response: AxiosResponse<Note[]> = await axios.get(
         "http://localhost:8000/api/notes/"
       );
       setNotes(response.data);
-    }
+    };
     getNotes();
   }, []);
 
@@ -55,16 +59,16 @@ export const NotesListPage = () => {
   return (
     <>
       <NoteLayout>
-        <Flex w="full" px={5}>
+        <Flex w="full" px={6} h="10vh">
           <Heading pb={6} size="lg" as="h2">
             <HamburgerIcon mb={1} /> Notes
           </Heading>
           <Spacer />
-          <Text fontSize="xl" pt="4" color="white.400">
+          <Text fontSize="xl" alignItems="center" color="white.400">
             {notes.length}
           </Text>
         </Flex>
-        <VStack minH="340px" overflowY="auto" sx={scrollbar}>
+        <VStack overflowY="auto" sx={scrollbar} h="50vh">
           {notes.map((note: Note) => (
             <Link
               key={note.id}
@@ -76,19 +80,27 @@ export const NotesListPage = () => {
               <ListItem
                 key={note.id}
                 tittle={note.tittle}
-                description={note.body}
+                body={note.body}
                 updateDate={formattedDate(note.updated)}
               />
             </Link>
           ))}
         </VStack>
-        <Flex w="full" justifyContent="end" bg="#2E3134" p={6} maxW="full">
+        <Flex
+          w="full"
+          justifyContent="end"
+          bg="#2E3134"
+          p={6}
+          maxW="full"
+          h="15vh"
+        >
           <IconButton
             aria-label="Add note"
             icon={<AddIcon />}
             colorScheme="orange"
             rounded="full"
             size="lg"
+            onClick={onNewNote}
           />
         </Flex>
       </NoteLayout>
