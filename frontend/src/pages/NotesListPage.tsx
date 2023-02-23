@@ -13,8 +13,8 @@ import { ListItem } from "../components/ListItem";
 import { NoteLayout } from "../layout/NoteLayout";
 import { Link as ReachLink } from "react-router-dom";
 
-import axios, { AxiosResponse } from "axios";
 import { useNavigate } from "react-router-dom";
+import { getNotes } from "../api/notesApi";
 
 interface Note {
   id: number;
@@ -41,13 +41,9 @@ export const NotesListPage = () => {
   };
 
   useEffect(() => {
-    const getNotes = async () => {
-      const response: AxiosResponse<Note[]> = await axios.get(
-        "http://localhost:8000/api/notes/"
-      );
-      setNotes(response.data);
-    };
-    getNotes();
+    getNotes().then((result) => {
+      setNotes(result);
+    });
   }, []);
 
   const scrollbar = {

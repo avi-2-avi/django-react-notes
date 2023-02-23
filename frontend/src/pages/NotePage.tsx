@@ -8,15 +8,10 @@ import {
   Button,
   useToast,
 } from "@chakra-ui/react";
-import axios, { AxiosResponse } from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { updateNote, getNote, putNote } from "../api/notesApi";
 import { NoteLayout } from "../layout/NoteLayout";
-
-interface Note {
-  tittle: string;
-  body: string;
-}
 
 const noteData = { tittle: "", body: "" };
 
@@ -50,34 +45,27 @@ export const NotePage = () => {
       return;
     }
 
-    const postNote = async () => {
-      try {
-        await axios.put(`http://localhost:8000/api/note/${id}/`, note);
-        navigate(-1);
-      } catch (e) {
-        toast({
-          description: `Error saving the note: ${(e as Error).message}`,
-          status: "error",
-        });
-      }
-    };
-
-    postNote();
+    try {
+      putNote(id, note);
+    } catch (e) {
+      toast({
+        description: `Error saving the note: ${(e as Error).message}`,
+        status: "error",
+      });
+    }
+    navigate(-1);
   };
 
   const onRemoveNote = () => {
-    const deleteNote = async () => {
-      try {
-        await axios.delete(`http://localhost:8000/api/note/${id}/`);
-        navigate(-1);
-      } catch (e) {
-        toast({
-          description: `Error saving the note: ${(e as Error).message}`,
-          status: "error",
-        });
-      }
-    };
-    deleteNote();
+    try {
+      updateNote(id);
+      navigate(-1);
+    } catch (e) {
+      toast({
+        description: `Error saving the note: ${(e as Error).message}`,
+        status: "error",
+      });
+    }
   };
 
   const onGoBack = () => {
@@ -85,14 +73,7 @@ export const NotePage = () => {
   };
 
   useEffect(() => {
-    const getNote = async () => {
-      const response: AxiosResponse<Note> = await axios.get(
-        `http://localhost:8000/api/note/${id}/`
-      );
-      setNote(response.data);
-    };
-
-    getNote();
+    getNote(id).then((result) => setNote(result));
   }, []);
 
   const scrollbar = {

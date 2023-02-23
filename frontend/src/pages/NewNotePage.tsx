@@ -8,9 +8,9 @@ import {
   Button,
   useToast,
 } from "@chakra-ui/react";
-import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { postNote } from "../api/notesApi";
 import { NoteLayout } from "../layout/NoteLayout";
 
 const noteData = { tittle: "", body: "" };
@@ -48,19 +48,16 @@ export const NewNotePage = () => {
       return;
     }
 
-    const postNote = async () => {
-      try {
-        await axios.post("http://localhost:8000/api/notes/", note);
-        navigate(-1);
-      } catch (e) {
-        toast({
-          description: `Error saving the note: ${(e as Error).message}`,
-          status: "error",
-        });
-      }
-    };
+    try {
+      postNote(note);
 
-    postNote();
+      navigate(-1);
+    } catch (e) {
+      toast({
+        description: `Error saving the note: ${(e as Error).message}`,
+        status: "error",
+      });
+    }
   };
 
   const onGoBack = () => {
