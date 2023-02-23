@@ -1,7 +1,3 @@
-# from rest_framework.parsers import JSONParser
-# from django.views.decorators.csrf import csrf_exempt
-# from django.http import JsonResponse, HttpResponse
-
 from rest_framework.views import APIView
 from .serializers import NoteSerializer
 from rest_framework.response import Response
