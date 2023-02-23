@@ -1,12 +1,10 @@
-from django.urls import path, include
+from django.urls import path
 from . import views
-from rest_framework import routers
-
-router = routers.DefaultRouter()
+from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('notes/', views.note_list),
-    path('note/<int:id>/', views.note_detail),
+    path('notes/', views.NoteList.as_view()),
+    path('note/<int:id>/', views.NoteDetail.as_view()),
 ]
 
+urlpatterns = format_suffix_patterns(urlpatterns)
