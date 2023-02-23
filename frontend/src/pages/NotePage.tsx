@@ -65,8 +65,19 @@ export const NotePage = () => {
     postNote();
   };
 
-  const onResetNote = () => {
-    setNote(noteData);
+  const onRemoveNote = () => {
+    const deleteNote = async () => {
+      try {
+        await axios.delete(`http://localhost:8000/api/note/${id}/`);
+        navigate(-1);
+      } catch (e) {
+        toast({
+          description: `Error saving the note: ${(e as Error).message}`,
+          status: "error",
+        });
+      }
+    };
+    deleteNote();
   };
 
   const onGoBack = () => {
@@ -113,8 +124,8 @@ export const NotePage = () => {
           </Heading>
           <Flex columnGap={4}>
             <Heading as="h2" size="md">
-              <Button background="inherit" onClick={onResetNote}>
-                Delete
+              <Button background="inherit" onClick={onRemoveNote}>
+                Remove
               </Button>
             </Heading>
             <Heading as="h2" size="md">
