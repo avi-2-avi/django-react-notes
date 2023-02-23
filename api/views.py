@@ -11,7 +11,7 @@ class NoteList(APIView):
     POST: Create a new note
     """
     def get(self, request, format=None):
-        notes = Note.objects.all()
+        notes = Note.objects.all().order_by('-updated')
         serializer = NoteSerializer(notes, many=True)
         return Response(serializer.data)
 
